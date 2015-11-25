@@ -1,4 +1,4 @@
-package au.com.suncorp.helloworld;
+package au.com.springtemplate.helloworld;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

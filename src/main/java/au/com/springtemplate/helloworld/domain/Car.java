@@ -1,4 +1,4 @@
-package au.com.suncorp.helloworld.domain;
+package au.com.springtemplate.helloworld.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
