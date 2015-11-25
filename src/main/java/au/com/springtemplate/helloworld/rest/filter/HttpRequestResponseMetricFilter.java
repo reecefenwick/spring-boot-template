@@ -47,14 +47,16 @@ public class HttpRequestResponseMetricFilter implements Filter {
 
         Long finishTime = new DateTime().getMillis();
         Long elapsedTime = finishTime - startTime;
-        String correlationID = ((HttpServletRequest) request).getHeader("X-CorrelationID");
+        String correlationID = httpRequest.getHeader("X-CorrelationID");
+        Integer responseCode = httpResponse.getStatus();
 
-        logRequestMetrics(requestURI, requestMethod, requestContentLength, finishTime, elapsedTime, correlationID);
+        logRequestMetrics(requestURI, requestMethod, requestContentLength, finishTime, elapsedTime, correlationID, responseCode);
     }
 
-    public void logRequestMetrics(String requestURI, String requestMethod, Integer requestContentLength, Long finishTime, Long elapsedTime, String correlationID) {
+    public void logRequestMetrics(String requestURI, String requestMethod, Integer requestContentLength,
+                                  Long finishTime, Long elapsedTime, String correlationID, Integer responseCode) {
         log.info("Request made to server uri={} method={} reqContentLength={} finishTime={} " +
-                "elapsedTime={} correlationID={}",
-                requestURI, requestMethod, requestContentLength, finishTime, elapsedTime, correlationID);
+                "elapsedTime={} correlationID={} responseCode={}",
+                requestURI, requestMethod, requestContentLength, finishTime, elapsedTime, correlationID, responseCode);
     }
 }
