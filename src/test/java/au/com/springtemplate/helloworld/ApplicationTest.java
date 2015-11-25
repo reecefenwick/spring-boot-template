@@ -1,4 +1,4 @@
-package au.com.suncorp.helloworld;
+package au.com.springtemplate.helloworld;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,9 +1,9 @@
-package au.com.suncorp.helloworld.rest;
+package au.com.springtemplate.helloworld.rest;
 
-import au.com.suncorp.helloworld.Application;
-import au.com.suncorp.helloworld.domain.Car;
-import au.com.suncorp.helloworld.repository.CarRepository;
-import au.com.suncorp.helloworld.utils.TestUtil;
+import au.com.springtemplate.helloworld.Application;
+import au.com.springtemplate.helloworld.domain.Car;
+import au.com.springtemplate.helloworld.repository.CarRepository;
+import au.com.springtemplate.helloworld.utils.TestUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
