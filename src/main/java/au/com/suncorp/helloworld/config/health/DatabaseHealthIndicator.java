@@ -1,4 +1,4 @@
-package au.com.springtemplate.helloworld.config.health;
+package au.com.suncorp.helloworld.config.health;
 
 import org.springframework.boot.actuate.health.DataSourceHealthIndicator;
 import org.springframework.boot.actuate.health.Health;

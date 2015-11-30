@@ -1,7 +1,7 @@
-package au.com.springtemplate.helloworld.rest;
+package au.com.suncorp.helloworld.rest;
 
-import au.com.springtemplate.helloworld.domain.Car;
-import au.com.springtemplate.helloworld.repository.CarRepository;
+import au.com.suncorp.helloworld.domain.Car;
+import au.com.suncorp.helloworld.repository.CarRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,6 +94,6 @@ public class CarController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         log.debug("REST request to delete Car : {}", id);
         carRepository.delete(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 }

@@ -1,4 +1,4 @@
-package au.com.springtemplate.helloworld.utils;
+package au.com.suncorp.helloworld.utils;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;

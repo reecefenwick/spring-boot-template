@@ -1,4 +1,4 @@
-package au.com.springtemplate.helloworld.rest.filter;
+package au.com.suncorp.helloworld.rest.filter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,14 +30,13 @@ public class CorrelationIDFilter implements Filter{
 
     @Override
     public void destroy() {
-        // Nothing to destory
+        // Nothing to destroy
     }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
 
-        String requestURI = httpRequest.getRequestURI();
         String correlationID = httpRequest.getHeader("X-CorrelationID");
 
         if (correlationID == null) correlationID = UUID.randomUUID().toString();

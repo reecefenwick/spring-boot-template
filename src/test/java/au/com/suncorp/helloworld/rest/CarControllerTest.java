@@ -1,9 +1,9 @@
-package au.com.springtemplate.helloworld.rest;
+package au.com.suncorp.helloworld.rest;
 
-import au.com.springtemplate.helloworld.Application;
-import au.com.springtemplate.helloworld.domain.Car;
-import au.com.springtemplate.helloworld.repository.CarRepository;
-import au.com.springtemplate.helloworld.utils.TestUtil;
+import au.com.suncorp.helloworld.Application;
+import au.com.suncorp.helloworld.domain.Car;
+import au.com.suncorp.helloworld.repository.CarRepository;
+import au.com.suncorp.helloworld.utils.TestUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.PostConstruct;
 import java.util.List;
 
-import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -61,7 +61,7 @@ public class CarControllerTest {
 
     @Before
     public void initTest() {
-        car = new Car();
+        car = new Car("Nissan", "Tiida");
     }
 
     @Test
@@ -80,6 +80,8 @@ public class CarControllerTest {
         List<Car> cars = carRepository.findAll();
         assertThat(cars, hasSize(databaseSizeBeforeCreate + 1));
         Car testCar = cars.get(cars.size() - 1);
+        assertThat(testCar.getMake(), equalTo("Nissan"));
+        assertThat(testCar.getModel(), equalTo("Tiida"));
     }
 
     @Test
@@ -92,7 +94,9 @@ public class CarControllerTest {
         restCarMockMvc.perform(get("/api/cars"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.[*].id").value(hasItem(car.getId().intValue())));
+                .andExpect(jsonPath("$.[*].id").value(hasItem(car.getId().intValue())))
+                .andExpect(jsonPath("$.[*].make").value("Nissan"))
+                .andExpect(jsonPath("$.[*].model").value("Tiida"));
     }
 
     @Test
@@ -105,7 +109,9 @@ public class CarControllerTest {
         restCarMockMvc.perform(get("/api/cars/{id}", car.getId()))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id").value(car.getId().intValue()));
+                .andExpect(jsonPath("$.id").value(car.getId().intValue()))
+                .andExpect(jsonPath("$.make").value("Nissan"))
+                .andExpect(jsonPath("$.model").value("Tiida"));
     }
 
     @Test
@@ -149,7 +155,7 @@ public class CarControllerTest {
         // Get the car
         restCarMockMvc.perform(delete("/api/cars/{id}", car.getId())
                 .accept(TestUtil.APPLICATION_JSON_UTF8))
-                .andExpect(status().isOk());
+                .andExpect(status().isNoContent());
 
         // Validate the database is empty
         List<Car> cars = carRepository.findAll();

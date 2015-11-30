@@ -1,4 +1,4 @@
-package au.com.springtemplate.helloworld.domain;
+package au.com.suncorp.helloworld.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,12 +15,41 @@ public class Car implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(name = "MAKE")
+    private String make;
+
+    @Column(name = "MODEL")
+    private String model;
+
+    public Car() {}
+
+    public Car(String make, String model) {
+        this.make = make;
+        this.model = model;
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getMake() {
+        return make;
+    }
+
+    public void setMake(String make) {
+        this.make = make;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
     }
 
     @Override
@@ -48,6 +77,8 @@ public class Car implements Serializable {
     public String toString() {
         return "Car{" +
                 "id=" + id +
-                '}';
+                "make=" + make +
+                "model=" + model +
+                "}";
     }
 }

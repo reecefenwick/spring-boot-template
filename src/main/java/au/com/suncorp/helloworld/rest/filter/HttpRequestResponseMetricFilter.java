@@ -1,4 +1,4 @@
-package au.com.springtemplate.helloworld.rest.filter;
+package au.com.suncorp.helloworld.rest.filter;
 
 
 import org.joda.time.DateTime;
@@ -10,6 +10,7 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import javax.validation.constraints.NotNull;
 
 /**
  * This filter is used to log request/response level information
@@ -27,7 +28,7 @@ public class HttpRequestResponseMetricFilter implements Filter {
 
     @Override
     public void destroy() {
-        // Nothing to destory
+        // Nothing to destroy
     }
 
     @Override
@@ -47,16 +48,21 @@ public class HttpRequestResponseMetricFilter implements Filter {
 
         Long finishTime = new DateTime().getMillis();
         Long elapsedTime = finishTime - startTime;
-        String correlationID = httpRequest.getHeader("X-CorrelationID");
+        String correlationID = httpResponse.getHeader("X-CorrelationID");
         Integer responseCode = httpResponse.getStatus();
 
         logRequestMetrics(requestURI, requestMethod, requestContentLength, finishTime, elapsedTime, correlationID, responseCode);
     }
 
-    public void logRequestMetrics(String requestURI, String requestMethod, Integer requestContentLength,
-                                  Long finishTime, Long elapsedTime, String correlationID, Integer responseCode) {
+    public void logRequestMetrics(@NotNull String requestURI,
+                                  @NotNull String requestMethod,
+                                  @NotNull Integer requestContentLength,
+                                  @NotNull Long finishTime,
+                                  @NotNull Long elapsedTime,
+                                  @NotNull String correlationID,
+                                  @NotNull Integer responseCode) {
         log.info("Request made to server uri={} method={} reqContentLength={} finishTime={} " +
-                "elapsedTime={} correlationID={} responseCode={}",
+                        "elapsedTime={} correlationID={} responseCode={}",
                 requestURI, requestMethod, requestContentLength, finishTime, elapsedTime, correlationID, responseCode);
     }
 }

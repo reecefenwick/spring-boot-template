@@ -1,6 +1,6 @@
-package au.com.springtemplate.helloworld.repository;
+package au.com.suncorp.helloworld.repository;
 
-import au.com.springtemplate.helloworld.domain.Car;
+import au.com.suncorp.helloworld.domain.Car;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

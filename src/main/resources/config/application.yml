@@ -1,0 +1,8 @@
+swagger:
+    title: Sample API
+    description: Sample API!
+    version: 0.0.1
+    termsOfServiceUrl: http://google.com/
+    contact:
+    license: Apache 2.0
+    licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.html
