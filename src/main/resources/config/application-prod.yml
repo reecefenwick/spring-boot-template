@@ -1,6 +1,11 @@
 server:
     port: 8080
 
+endpoints:
+    enabled: false
+    health:
+        enabled: true
+
 spring:
     profiles:
         active: prod
@@ -25,4 +30,6 @@ spring:
             hibernate.cache.use_second_level_cache: false
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: false
-
+    endpoints:
+        enabled: false
+        sensitive: false

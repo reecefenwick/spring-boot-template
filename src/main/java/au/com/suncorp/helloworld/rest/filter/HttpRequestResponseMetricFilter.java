@@ -10,7 +10,6 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import javax.validation.constraints.NotNull;
 
 /**
  * This filter is used to log request/response level information
@@ -40,29 +39,36 @@ public class HttpRequestResponseMetricFilter implements Filter {
         String requestURI = httpRequest.getRequestURI();
         String requestMethod = httpRequest.getMethod();
         Integer requestContentLength = httpRequest.getContentLength();
+        String remoteIP = request.getRemoteAddr();
+        String remoteHost = request.getRemoteHost();
 
         // Pass request down the chain
         chain.doFilter(request, response);
 
         HttpServletResponse httpResponse = (HttpServletResponse) response;
-
         Long finishTime = new DateTime().getMillis();
         Long elapsedTime = finishTime - startTime;
         String correlationID = httpResponse.getHeader("X-CorrelationID");
         Integer responseCode = httpResponse.getStatus();
+        Integer responseSize = httpResponse.getBufferSize();
 
-        logRequestMetrics(requestURI, requestMethod, requestContentLength, finishTime, elapsedTime, correlationID, responseCode);
+        logRequestMetrics(requestURI, requestMethod, requestContentLength,
+                finishTime, elapsedTime, correlationID, responseCode, remoteIP, remoteHost, responseSize);
     }
 
-    public void logRequestMetrics(@NotNull String requestURI,
-                                  @NotNull String requestMethod,
-                                  @NotNull Integer requestContentLength,
-                                  @NotNull Long finishTime,
-                                  @NotNull Long elapsedTime,
-                                  @NotNull String correlationID,
-                                  @NotNull Integer responseCode) {
+    public void logRequestMetrics(String requestURI,
+                                  String requestMethod,
+                                  Integer requestContentLength,
+                                  Long finishTime,
+                                  Long elapsedTime,
+                                  String correlationID,
+                                  Integer responseCode,
+                                  String remoteIP,
+                                  String remoteHost,
+                                  Integer responseSize) {
         log.info("Request made to server uri={} method={} reqContentLength={} finishTime={} " +
-                        "elapsedTime={} correlationID={} responseCode={}",
-                requestURI, requestMethod, requestContentLength, finishTime, elapsedTime, correlationID, responseCode);
+                        "elapsedTime={} correlationID={} responseCode={} remoteIP={} remoteHost={}",
+                requestURI, requestMethod, requestContentLength, finishTime, elapsedTime,
+                correlationID, responseCode, remoteIP, remoteHost, responseSize);
     }
 }

@@ -39,7 +39,9 @@ public class CorrelationIDFilter implements Filter{
 
         String correlationID = httpRequest.getHeader("X-CorrelationID");
 
-        if (correlationID == null) correlationID = UUID.randomUUID().toString();
+        if (correlationID == null) {
+            correlationID = UUID.randomUUID().toString();
+        }
 
         ((HttpServletResponse) response).addHeader("X-CorrelationID", correlationID);
         chain.doFilter(request, response);
