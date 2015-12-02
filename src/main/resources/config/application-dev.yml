@@ -5,7 +5,6 @@ server:
         key-store-password: password
         keyStoreType: PKCS12
         keyAlias: tomcat
-        port: 8443
 
 
 endpoints:
