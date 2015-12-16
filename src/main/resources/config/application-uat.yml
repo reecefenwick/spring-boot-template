@@ -6,7 +6,6 @@ server:
         keyStoreType: PKCS12
         keyAlias: tomcat
 
-
 endpoints:
     enabled: false
     health:
@@ -14,7 +13,7 @@ endpoints:
 
 spring:
     profiles:
-        active: prod
+        active: uat
     datasource:
         dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
         url:

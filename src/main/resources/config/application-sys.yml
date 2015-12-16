@@ -14,7 +14,7 @@ endpoints:
 
 spring:
     profiles:
-        active: prod
+        active: sys
     datasource:
         dataSourceClassName: org.postgresql.ds.PGSimpleDataSource
         url:
