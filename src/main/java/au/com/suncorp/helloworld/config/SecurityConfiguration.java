@@ -13,7 +13,6 @@ public class SecurityConfiguration extends
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        System.out.println("helloreece");
         http
             .headers()
                 .addHeaderWriter(new StaticHeadersWriter("server", "0"));
