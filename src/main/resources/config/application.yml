@@ -17,3 +17,8 @@ server:
 security:
   basic:
     enabled: false
+
+spring:
+  application:
+    name: app # Prevents the leaking of information in response header X-Application-Context
+    index: 0 # Prevents the leaking of information in response headers X-Application-Context
