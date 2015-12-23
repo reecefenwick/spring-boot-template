@@ -14,6 +14,7 @@ public class SecurityConfiguration extends
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+            .csrf().disable()
             .headers()
                 .addHeaderWriter(new StaticHeadersWriter("Server", "Server"));
     }

@@ -13,6 +13,7 @@ import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -40,6 +41,8 @@ import static org.hamcrest.Matchers.hasItem;
 @IntegrationTest
 public class CarControllerTest {
 
+    @Autowired
+    private FilterChainProxy filterChainProxy;
 
     @Autowired
     private CarRepository carRepository;
@@ -56,7 +59,7 @@ public class CarControllerTest {
         MockitoAnnotations.initMocks(this);
         CarController carController = new CarController();
         ReflectionTestUtils.setField(carController, "carRepository", carRepository);
-        this.restCarMockMvc = MockMvcBuilders.standaloneSetup(carController).setMessageConverters(jacksonMessageConverter).build();
+        this.restCarMockMvc = MockMvcBuilders.standaloneSetup(carController).addFilters(filterChainProxy).setMessageConverters(jacksonMessageConverter).build();
     }
 
     @Before
