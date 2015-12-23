@@ -15,6 +15,6 @@ public class SecurityConfiguration extends
     protected void configure(HttpSecurity http) throws Exception {
         http
             .headers()
-                .addHeaderWriter(new StaticHeadersWriter("server", "0"));
+                .addHeaderWriter(new StaticHeadersWriter("Server", "Server"));
     }
 }
